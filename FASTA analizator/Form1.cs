@@ -135,5 +135,87 @@ namespace FASTA_analizator
                 }
             }
         }
+
+        private void buttonImportJSON_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Pliki JSON|*.json|Wszystkie pliki|*.*";
+                openFileDialog.Title = "Wybierz plik JSON do importu";
+                openFileDialog.Multiselect = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    foreach (var fileName in openFileDialog.FileNames)
+                    {
+                        if (!Importer.ValidateJSON(fileName, out string error))
+                        {
+                            MessageBox.Show($"Błąd walidacji pliku {Path.GetFileName(fileName)}: {error}");
+                            continue;
+                        }
+                        try
+                        {
+                            var nowe = Importer.ImportFromJSON(fileName);
+                            foreach (var seq in nowe)
+                            {
+                                // Nadpisuje sekwencje o tej samej nazwie
+                                var idx = sekwencje.FindIndex(s => s.Nazwa == seq.Nazwa);
+                                if (idx >= 0)
+                                    sekwencje[idx] = seq;
+                                else
+                                    sekwencje.Add(seq);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Błąd podczas importu pliku {Path.GetFileName(fileName)}: {ex.Message}");
+                        }
+                    }
+                    AktualizujListe();
+                    AktualizujWykres();
+                }
+            }
+        }
+
+        private void buttonImportXML_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Pliki XML|*.xml|Wszystkie pliki|*.*";
+                openFileDialog.Title = "Wybierz plik XML do importu";
+                openFileDialog.Multiselect = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    foreach (var fileName in openFileDialog.FileNames)
+                    {
+                        if (!Importer.ValidateXML(fileName, out string error))
+                        {
+                            MessageBox.Show($"Błąd walidacji pliku {Path.GetFileName(fileName)}: {error}");
+                            continue;
+                        }
+                        try
+                        {
+                            var nowe = Importer.ImportFromXML(fileName);
+                            foreach (var seq in nowe)
+                            {
+                                // Nadpisuje sekwencje o tej samej nazwie
+                                var idx = sekwencje.FindIndex(s => s.Nazwa == seq.Nazwa);
+                                if (idx >= 0)
+                                    sekwencje[idx] = seq;
+                                else
+                                    sekwencje.Add(seq);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Błąd podczas importu pliku {Path.GetFileName(fileName)}: {ex.Message}");
+                        }
+                    }
+                    AktualizujListe();
+                    AktualizujWykres();
+                }
+            }
+        }
     }
 }

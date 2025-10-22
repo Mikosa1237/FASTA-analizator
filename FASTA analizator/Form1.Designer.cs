@@ -14,6 +14,8 @@
         private System.Windows.Forms.Button buttonWczytajFasta;
         private System.Windows.Forms.Button buttonEksportCSV;
         private System.Windows.Forms.Button buttonEksportJSON;
+        private System.Windows.Forms.Button buttonImportJSON;
+        private System.Windows.Forms.Button buttonImportXML;
         private System.Windows.Forms.DataVisualization.Charting.Chart wykres;
 
         /// <summary>
@@ -45,6 +47,8 @@
             this.buttonWczytajFasta = new System.Windows.Forms.Button();
             this.buttonEksportCSV = new System.Windows.Forms.Button();
             this.buttonEksportJSON = new System.Windows.Forms.Button();
+            this.buttonImportJSON = new System.Windows.Forms.Button();
+            this.buttonImportXML = new System.Windows.Forms.Button();
             this.wykres = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.wykres)).BeginInit();
             this.SuspendLayout();
@@ -99,9 +103,23 @@
             // buttonEksportJSON
             // 
             this.buttonEksportJSON.Location = new System.Drawing.Point(204, 390);
-            this.buttonEksportJSON.Size = new System.Drawing.Size(108, 30);
+            this.buttonEksportJSON.Size = new System.Drawing.Size(90, 30);
             this.buttonEksportJSON.Text = "Eksport JSON";
             this.buttonEksportJSON.Click += new System.EventHandler(this.buttonEksportJSON_Click);
+            // 
+            // buttonImportJSON
+            // 
+            this.buttonImportJSON.Location = new System.Drawing.Point(12, 430);
+            this.buttonImportJSON.Size = new System.Drawing.Size(90, 30);
+            this.buttonImportJSON.Text = "Import JSON";
+            this.buttonImportJSON.Click += new System.EventHandler(this.buttonImportJSON_Click);
+            // 
+            // buttonImportXML
+            // 
+            this.buttonImportXML.Location = new System.Drawing.Point(108, 430);
+            this.buttonImportXML.Size = new System.Drawing.Size(90, 30);
+            this.buttonImportXML.Text = "Import XML";
+            this.buttonImportXML.Click += new System.EventHandler(this.buttonImportXML_Click);
             // 
             // wykres
             // 
@@ -113,7 +131,7 @@
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 480);
             this.Controls.Add(this.listaSekwencji);
             this.Controls.Add(this.textBoxGC);
             this.Controls.Add(this.textBoxKodony);
@@ -121,6 +139,8 @@
             this.Controls.Add(this.buttonWczytajFasta);
             this.Controls.Add(this.buttonEksportCSV);
             this.Controls.Add(this.buttonEksportJSON);
+            this.Controls.Add(this.buttonImportJSON);
+            this.Controls.Add(this.buttonImportXML);
             this.Controls.Add(this.wykres);
             this.Text = "Analizator FASTA";
             ((System.ComponentModel.ISupportInitialize)(this.wykres)).EndInit();
